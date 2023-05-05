@@ -1,3 +1,5 @@
+import os
+import glob
 import cv2
 import numpy as np
 
@@ -38,3 +40,10 @@ def count_glycans(im_file, bottom_left=(None, None), top_right=(None, None)):
       glycan_count += 1
 
   return glycan_count
+
+
+if __name__=="__main__":
+  for im_file in glob.iglob("images/cropped/*.tif"):
+      glycan_count = count_glycans(im_file)
+      area_of_interest = os.path.basename(im_file).split(".")[0]
+      print(f"{area_of_interest}: {glycan_count}")
